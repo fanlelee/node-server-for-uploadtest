@@ -8,8 +8,10 @@ const app = express()
 
 app.options('/upload', cors())
 app.post('/upload', cors(), upload.single('file'), function (req, res, next) {
-  res.send(req.file.filename)
+    let obj = {id:req.file.filename}
+    res.send(JSON.stringify(obj))
 })
+
 app.get('/preview/:key', cors(), function(req, res, next){
   res.sendFile(`uploads/${req.params.key}`, {
     root: __dirname,
